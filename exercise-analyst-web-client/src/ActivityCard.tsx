@@ -15,26 +15,28 @@ const ActivityCard = (props: ActivityCardProps) => {
   return (
     <Card
       cover={
-        <Image
-          className="activity-image"
-          src={getImageUrlForActivity(exercise.activity)}
-          preview={false}
-        />
+        <div className="activity-image">
+          <Image
+            src={getImageUrlForActivity(exercise.activity)}
+            preview={false}
+          />
+          <span className="activity-text">{exercise.activity}</span>
+        </div>
       }
     >
       <Row gutter={[8, 16]}>
-        <Col xs={12}>
+        {/* <Col xs={24}>
           <Row justify="center" className="text-center">
             <Col xs={24}>
-              <Typography.Text disabled>Activity</Typography.Text>
+              <Divider plain>Activity</Divider>
             </Col>
             <Col xs={24}>
               <Typography.Text>{exercise.activity}</Typography.Text>
             </Col>
           </Row>
-        </Col>
+        </Col> */}
 
-        <Col xs={12}>
+        {/* <Col xs={12}>
           <Row justify="center" className="text-center">
             <Col xs={24}>
               <Typography.Text disabled>Repetitions</Typography.Text>
@@ -43,14 +45,10 @@ const ActivityCard = (props: ActivityCardProps) => {
               <Typography.Text>{exercise.repetitions}</Typography.Text>
             </Col>
           </Row>
-        </Col>
+        </Col> */}
 
         <Col xs={24}>
-          <Row className="text-center">
-            <Col xs={24}>
-              <Typography.Text disabled>Timing</Typography.Text>
-            </Col>
-
+          <Row className="text-left">
             <Col xs={3}>
               <Typography.Text disabled>Start:</Typography.Text>
             </Col>
