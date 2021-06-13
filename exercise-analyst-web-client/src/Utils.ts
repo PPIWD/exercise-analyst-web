@@ -22,6 +22,7 @@ export const getImageUrlForActivity = (activity: string) => {
 
 export const getCaloriesForExercises = (
   activity: string,
+  weight: number,
   dateStart: string,
   dateEnd: string
 ) => {
@@ -30,7 +31,6 @@ export const getCaloriesForExercises = (
 
   const differenceInMs = end - start;
   const timeSpanInMinutes = differenceInMs / 60000;
-  const weigthInKg = 70;
 
   // MTU: https://golf.procon.org/met-values-for-800-activities/
   let met = 1;
@@ -60,7 +60,7 @@ export const getCaloriesForExercises = (
       break;
   }
 
-  const caloriesBurned = (timeSpanInMinutes * (met * 3.5 * weigthInKg)) / 200;
+  const caloriesBurned = (timeSpanInMinutes * (met * 3.5 * weight)) / 200;
   return caloriesBurned.toFixed(0);
 };
 

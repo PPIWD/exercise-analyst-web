@@ -1,6 +1,7 @@
 import { Button, Col, notification, Result, Row, Spin } from "antd";
 import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
+import jwt_decode from "jwt-decode";
 import "./App.css";
 import { Exercise } from "./Exercise";
 import ActivityCard from "./ActivityCard";
@@ -13,6 +14,7 @@ const App = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [exerciseIdToShow, setExerciseIdToShow] = useState<number | null>(null);
+  const [weight, setWeight] = useState<number>(70);
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -28,8 +30,12 @@ const App = () => {
       // na razie tu wklejamy tymczasowy do testów, ale trzeba będzie go
       // brać z webview
       accessToken =
-        "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImp0aSI6Ijk4MzA2ZDU2LTAzODMtNDY2Ny04YzIwLWFmZGE5YjM5MWJmZSIsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJ1c2VySWQiOiJlOGU0YjdlMS1lYjM5LTRiMmMtYjUxNi1iZTQ0NzcwZThlNzciLCJyb2xlIjoiVXNlciIsIm5iZiI6MTYyMDgzNDgyNCwiZXhwIjoxNjUyMzcwODI0LCJpYXQiOjE2MjA4MzQ4MjQsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzM0IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMzQifQ.Z_qV9-MSXtK0IEz2ywTR7mM-6Z9cCMM9rGWMrNfRHOLNveUS1XMIoss34QXhd4Ry6Rua_KpOeKWktV--_It7Ow";
+        "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJleGFtcGxlQGRvbWFpbi5jb20iLCJqdGkiOiJjYzM0NzI3ZS1mNTI3LTRlOWQtYmEzZi1hNzNkNzRjODU3MjMiLCJlbWFpbCI6ImV4YW1wbGVAZG9tYWluLmNvbSIsIldlaWdodEluS2ciOiI2MCIsInVzZXJJZCI6ImYzZGZiZTZmLTY0ZWMtNDkxOS05NjE3LTFlZWFjZjgzNGE4ZiIsInJvbGUiOiJVc2VyIiwibmJmIjoxNjIzNTg4MDMzLCJleHAiOjE2NTUxMjQwMzMsImlhdCI6MTYyMzU4ODAzMywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMzQiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDMzNCJ9.UAJzGDzU0VM0Lm7sAViZeJEtbax3UXNOFv0-VURFoVpXnmd1W-LIK08USSFk_vJiYGhkvTTFsj3yNCJcVyrrIA";
     }
+
+
+    let decoded = jwt_decode(accessToken) as any;
+    setWeight(+decoded['WeightInKg'].replace(',', '.'))
 
     axios
       .get(`${baseApiUrl}/exercises`, {
@@ -103,6 +109,7 @@ const App = () => {
         {exerciseIdToShow && (
           <ActivityDetails
             exercise={exercises.find((e) => e.id === exerciseIdToShow)!}
+            weight={weight}
           />
         )}
       </Modal>

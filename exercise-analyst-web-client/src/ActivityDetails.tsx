@@ -10,6 +10,7 @@ import {
 
 interface ActivityDetailsProps {
   exercise: Exercise;
+  weight: number,
 }
 
 const ActivityDetails = (props: ActivityDetailsProps) => {
@@ -88,6 +89,7 @@ const ActivityDetails = (props: ActivityDetailsProps) => {
             <Typography.Text>
               {getCaloriesForExercises(
                 exercise.activity,
+                props.weight,
                 exercise.dateTimeStart,
                 exercise.dateTimeEnd
               )}
