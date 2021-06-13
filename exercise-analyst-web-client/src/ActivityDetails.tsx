@@ -80,23 +80,23 @@ const ActivityDetails = (props: ActivityDetailsProps) => {
         />
       </Col>
 
-      {exercise.repetitions !== 0 && (
-        <>
-          <Col xs={10}>
-            <Typography.Text disabled>Calories burned:</Typography.Text>
-          </Col>
-          <Col xs={14}>
-            <Typography.Text>
-              {getCaloriesForExercises(
-                exercise.activity,
-                props.weight,
-                exercise.dateTimeStart,
-                exercise.dateTimeEnd
-              )}
-            </Typography.Text>
-          </Col>
-        </>
-      )}
+      {/* {exercise.repetitions !== 0 && ( */}
+      <>
+        <Col xs={10}>
+          <Typography.Text disabled>Calories burned:</Typography.Text>
+        </Col>
+        <Col xs={14}>
+          <Typography.Text>
+            {getCaloriesForExercises(
+              exercise.activity,
+              props.weight,
+              exercise.dateTimeStart,
+              exercise.dateTimeEnd
+            )}
+          </Typography.Text>
+        </Col>
+      </>
+      {/* )} */}
     </Row>
   );
 };
