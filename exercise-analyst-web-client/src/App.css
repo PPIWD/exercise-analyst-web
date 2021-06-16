@@ -1,11 +1,31 @@
-.activity-image {
+.activity-image img {
   object-fit: cover;
   width: 100%;
-  height: 150px;
+  height: 100px;
+  position: relative;
+}
+
+.activity-text {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 30px;
+  width: 100%;
+  font-size: large;
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .text-center {
   text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .container {

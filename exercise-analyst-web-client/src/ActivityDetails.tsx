@@ -1,7 +1,12 @@
 import { Col, Divider, Image, Row, Typography } from "antd";
 import React from "react";
 import { Exercise } from "./Exercise";
-import { getDifferenceBetweenDates, getUserFriendlyDate } from "./Utils";
+import {
+  getCaloriesForExercises,
+  getDifferenceBetweenDates,
+  getMusclesAffectedImgSrc,
+  getUserFriendlyDate,
+} from "./Utils";
 
 interface ActivityDetailsProps {
   exercise: Exercise;
@@ -20,13 +25,13 @@ const ActivityDetails = (props: ActivityDetailsProps) => {
         <Typography.Text>{exercise.activity}</Typography.Text>
       </Col>
 
-      {/* Repetitions */}
+      {/* Repetitions
       <Col xs={7}>
         <Typography.Text disabled>Repetitions:</Typography.Text>
       </Col>
       <Col xs={17}>
         <Typography.Text>{exercise.repetitions}</Typography.Text>
-      </Col>
+      </Col> */}
 
       <Divider>Timing</Divider>
       {/* Start */}
@@ -70,16 +75,26 @@ const ActivityDetails = (props: ActivityDetailsProps) => {
       <Col xs={24}>
         <Image
           preview={false}
-          src="https://st2.depositphotos.com/1909187/10981/i/950/depositphotos_109811754-stock-photo-chest-muscles-pectoralis-major-and.jpg"
+          src={getMusclesAffectedImgSrc(exercise.activity)}
         />
       </Col>
 
-      <Col xs={10}>
-        <Typography.Text disabled>Calories burned:</Typography.Text>
-      </Col>
-      <Col xs={14}>
-        <Typography.Text>100</Typography.Text>
-      </Col>
+      {exercise.repetitions !== 0 && (
+        <>
+          <Col xs={10}>
+            <Typography.Text disabled>Calories burned:</Typography.Text>
+          </Col>
+          <Col xs={14}>
+            <Typography.Text>
+              {getCaloriesForExercises(
+                exercise.activity,
+                exercise.dateTimeStart,
+                exercise.dateTimeEnd
+              )}
+            </Typography.Text>
+          </Col>
+        </>
+      )}
     </Row>
   );
 };
